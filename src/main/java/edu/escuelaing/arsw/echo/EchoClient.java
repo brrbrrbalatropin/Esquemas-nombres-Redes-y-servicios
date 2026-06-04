@@ -1,4 +1,4 @@
-package edu.escuelaing.arsw.ejercicio4_2_1;
+package edu.escuelaing.arsw.echo;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -14,7 +14,7 @@ public class EchoClient {
         BufferedReader in = null;
 
         try {
-            echoSocket = new Socket("127.0.0.1", 35001);
+            echoSocket = new Socket("127.0.0.1", 35002);
             out = new PrintWriter(echoSocket.getOutputStream(), true);
             in = new BufferedReader(new InputStreamReader(echoSocket.getInputStream()));
         } catch (UnknownHostException e) {

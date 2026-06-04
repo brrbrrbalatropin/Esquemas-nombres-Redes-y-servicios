@@ -1,4 +1,4 @@
-package edu.escuelaing.arsw.ejercicio4_2_1;
+package edu.escuelaing.arsw.ejercicio4_3_1;
 
 import java.io.BufferedReader;
 import java.io.IOException;
