@@ -24,21 +24,6 @@ Taller de introducción a esquemas de nombres, redes, clientes y servicios con J
 ```bash
 mvn compile
 ```
-
-## Compilar un módulo específico
-
-```bash
-cd 01-urls
-mvn compile
-```
-
-## Ejecutar una clase específica
-
-```bash
-cd 01-urls
-mvn exec:java -Dexec.mainClass="edu.escuelaing.arsw.UrlReader"
-```
-
 ## Referencias
 
 - [Java Networking Tutorial - Oracle](https://docs.oracle.com/javase/tutorial/networking/index.html)
