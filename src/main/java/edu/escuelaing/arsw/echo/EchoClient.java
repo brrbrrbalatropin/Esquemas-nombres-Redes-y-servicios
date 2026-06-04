@@ -5,39 +5,36 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.net.UnknownHostException;
+import java.util.Scanner;
 public class EchoClient {
 
     public static void main(String[] args) throws IOException {
-        Socket echoSocket = null;
-        PrintWriter out = null;
-        BufferedReader in = null;
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Puerto del servidor: ");
+        int puerto = Integer.parseInt(scanner.nextLine().trim());
 
+        Socket socket = null;
         try {
-            echoSocket = new Socket("127.0.0.1", 35002);
-            out = new PrintWriter(echoSocket.getOutputStream(), true);
-            in = new BufferedReader(new InputStreamReader(echoSocket.getInputStream()));
-        } catch (UnknownHostException e) {
-            System.err.println("Host desconocido.");
-            System.exit(1);
+            socket = new Socket("127.0.0.1", puerto);
+            System.out.println("Conectado al puerto " + puerto + ". Escribe mensajes (\"bye\" para salir):");
         } catch (IOException e) {
-            System.err.println("No se pudo conectar al servidor");
+            System.err.println("No se pudo conectar al puerto " + puerto + " Está corriendo el servidor?");
             System.exit(1);
         }
 
+        PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+        BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));
-        String userInput;
-        System.out.println("Conectado al servidor. Escribe mensajes (\"bye\" para salir):");
 
+        String userInput;
         while ((userInput = stdIn.readLine()) != null) {
             out.println(userInput);
-            System.out.println("Respuesta del servidor: " + in.readLine());
+            System.out.println("Respuesta: " + in.readLine());
             if (userInput.equalsIgnoreCase("bye")) break;
         }
 
         out.close();
         in.close();
-        stdIn.close();
-        echoSocket.close();
+        socket.close();
     }
 }
