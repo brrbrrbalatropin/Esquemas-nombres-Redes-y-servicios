@@ -57,15 +57,3 @@ mvn exec:java -Dexec.mainClass="edu.escuelaing.arsw.tcp.SquareServer"
 ```
 
 For client-server pairs (TCP, UDP, RMI), start the server first, then the client. For `ChatApp`, run two instances simultaneously with mirrored port configurations.
-
----
-
-## Project structure
-
-```
-src/main/java/edu/escuelaing/arsw/
-├── urls/
-├── tcp/
-├── udp/
-└── rmi/
-```
