@@ -1,29 +1,71 @@
-# ARSW Networking Lab 2026-i
+# Java Networking Lab
 
-Taller de introducción a esquemas de nombres, redes, clientes y servicios con Java.
+A hands-on exploration of Java's networking capabilities, covering the four main communication mechanisms available in the `java.net` package: URLs, TCP Sockets, UDP Datagrams, and RMI (Remote Method Invocation).
 
-**Escuela Colombiana de Ingeniería** | ARSW 2026-i
+Each package is self-contained and demonstrates a different layer of network communication, from high-level resource fetching to distributed object invocation.
 
-## Estructura del proyecto
+---
 
-| Módulo | Tema | Ejercicios |
-|---|---|---|
-| `01-urls` | URLs en Java | Ejercicios 1 y 2 |
-| `02-tcp-sockets` | Sockets TCP | Ejercicios 4.3.1, 4.3.2, 4.5.1 |
-| `03-udp-datagrams` | Datagramas UDP | Ejercicio 5.2.1 |
-| `04-rmi` | RMI Echo Server | Ejemplo del taller |
-| `05-rmi-chat` | RMI Chat P2P | Ejercicio 6.4.1 |
+## What's inside
 
-## Requisitos
+### URLs
+Working with Java's `URL` class to interact with internet resources.
+
+- **UrlReader** — parses a URL and prints each of its components (protocol, host, port, path, query, etc.)
+- **UrlBrowser** — a minimal browser that downloads the HTML content of any URL and saves it to `resultado.html`
+
+### TCP Sockets
+Client-server communication over TCP using `Socket` and `ServerSocket`.
+
+- **EchoServer / EchoClient** — baseline echo server that returns whatever the client sends
+- **SquareServer** — receives a number, responds with its square
+- **TrigServer** — responds with sin, cos, or tan of a number; the active function can be switched at runtime with `fun:sin`, `fun:cos`, or `fun:tan`
+- **WebServer** — a minimal HTTP server that serves HTML files and images from a local `webroot/` directory, handling multiple sequential requests
+- **TcpClient** — generic TCP client that connects to any of the above servers by port number
+
+### UDP Datagrams
+Connectionless communication using `DatagramSocket` and `DatagramPacket`.
+
+- **TimeServer** — responds with the current server time whenever it receives a request
+- **TimeClient** — polls the server every 5 seconds and displays the time; if the server goes down, it keeps the last known time and resumes automatically when the server comes back
+
+### RMI
+Distributed object communication using Java RMI, allowing method calls across JVM instances.
+
+- **EchoRmiServer / EchoRmiClient** — baseline RMI example: client invokes a remote method and gets a response as if it were a local call
+- **ChatApp** — a peer-to-peer chat application where each instance acts as both client and server simultaneously; supports two nodes connecting by IP and port
+
+---
+
+## Requirements
 
 - Java 11+
 - Maven 3.8+
 
-## Compilar todo el proyecto
+## Build
 
 ```bash
 mvn compile
 ```
-## Referencias
 
-- [Java Networking Tutorial - Oracle](https://docs.oracle.com/javase/tutorial/networking/index.html)
+## Run
+
+Each class has a `main` method and can be run directly from IntelliJ or via Maven:
+
+```bash
+mvn exec:java -Dexec.mainClass="edu.escuelaing.arsw.tcp.SquareServer"
+```
+
+For client-server pairs (TCP, UDP, RMI), start the server first, then the client. For `ChatApp`, run two instances simultaneously with mirrored port configurations.
+
+---
+
+## Project structure
+
+```
+src/main/java/edu/escuelaing/arsw/
+├── urls/
+├── tcp/
+├── udp/
+└── rmi/
+```
